@@ -2,8 +2,19 @@
 name = "atelier-rest-api"
 version = "0.1.0"
 dependencies = [
- "git-grid 0.0.1 (git+https://github.com/kanvaz/git-grid.git)",
+ "atelier 0.0.1 (git+https://github.com/kanvaz/atelier.git)",
  "nickel 0.2.0 (git+https://github.com/nickel-org/nickel.rs.git)",
+]
+
+[[package]]
+name = "atelier"
+version = "0.0.1"
+source = "git+https://github.com/kanvaz/atelier.git#3bbb463db2afd909d6f8cd43dbd17cd57bb11992"
+dependencies = [
+ "clap 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "readext 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rustc-serialize 0.3.12 (registry+https://github.com/rust-lang/crates.io-index)",
+ "uuid 0.1.16 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -31,17 +42,6 @@ dependencies = [
 name = "gcc"
 version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-
-[[package]]
-name = "git-grid"
-version = "0.0.1"
-source = "git+https://github.com/kanvaz/git-grid.git#43ecffe022a11185cb0dd6c2e795e2fdfd6a432a"
-dependencies = [
- "clap 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "readext 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "rustc-serialize 0.3.12 (registry+https://github.com/rust-lang/crates.io-index)",
- "uuid 0.1.16 (registry+https://github.com/rust-lang/crates.io-index)",
-]
 
 [[package]]
 name = "groupable"

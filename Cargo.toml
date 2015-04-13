@@ -6,6 +6,6 @@ authors = ["Christoph Burgdorf <christoph.burgdorf@bvsn.org>"]
 [dependencies.nickel]
 git = "https://github.com/nickel-org/nickel.rs.git"
 
-[dependencies.git-grid]
-# git = "file:/Users/cburgdorf/Documents/hacking/git-grid"
-git = "https://github.com/kanvaz/git-grid.git"
+[dependencies.atelier]
+# git = "file:/Users/cburgdorf/Documents/hacking/atelier"
+git = "https://github.com/kanvaz/atelier.git"

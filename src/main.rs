@@ -1,12 +1,12 @@
 #[macro_use]
 extern crate nickel;
-extern crate git_grid;
+extern crate atelier;
 
 use nickel::Nickel;
 use nickel::router::http_router::HttpRouter;
 use nickel::JsonBody;
-use git_grid::file_set::FileSet;
-use git_grid::repository_locator::{ self, RepositoryState };
+use atelier::file_set::FileSet;
+use atelier::repository_locator::{ self, RepositoryState };
 
 fn main() {
     let mut server = Nickel::new();

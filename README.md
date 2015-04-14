@@ -14,7 +14,7 @@ So how do you get to the binary? If you are a Rust user, things are quite simple
 Just clone this repository and run `cargo build` to compile the server.
 
 If you didn't touch Rust yet but are on a Mac you can just grab the latest binary
-for Mac from here.
+for Mac from [here](https://github.com/kanvaz/atelier-rest-api/releases/).
 
 1. Start the server
 

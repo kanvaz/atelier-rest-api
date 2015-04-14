@@ -3,15 +3,15 @@ name = "atelier-rest-api"
 version = "0.1.0"
 dependencies = [
  "atelier 0.0.1 (git+https://github.com/kanvaz/atelier.git)",
- "nickel 0.2.0 (git+https://github.com/nickel-org/nickel.rs.git)",
+ "nickel 0.2.1 (git+https://github.com/nickel-org/nickel.rs.git)",
 ]
 
 [[package]]
 name = "atelier"
 version = "0.0.1"
-source = "git+https://github.com/kanvaz/atelier.git#3bbb463db2afd909d6f8cd43dbd17cd57bb11992"
+source = "git+https://github.com/kanvaz/atelier.git#a97ec9fea290f3955e8a51bd0d93293510f68cf6"
 dependencies = [
- "clap 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "clap 0.6.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "readext 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "rustc-serialize 0.3.12 (registry+https://github.com/rust-lang/crates.io-index)",
  "uuid 0.1.16 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -24,7 +24,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "clap"
-version = "0.6.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
@@ -122,8 +122,8 @@ dependencies = [
 
 [[package]]
 name = "nickel"
-version = "0.2.0"
-source = "git+https://github.com/nickel-org/nickel.rs.git#8c07dd712883029df4c2fb813bc2deea668daaa9"
+version = "0.2.1"
+source = "git+https://github.com/nickel-org/nickel.rs.git#03c3eb234b90122a752dc6e38f1075ab4bf8cd34"
 dependencies = [
  "groupable 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "hyper 0.3.11 (registry+https://github.com/rust-lang/crates.io-index)",

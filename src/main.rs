@@ -20,6 +20,14 @@ fn main() {
         format!("{:?}", repository)
     });
 
+    //curl 'http://localhost:6767/kanvaz/<PUT-REPOSITORY-ID-HERE>' -X PUT -H 'Content-Type: application/json;charset=UTF-8'  --data-binary $'{ "files": [{ "name":"style.css", "content": "button: { color: green; }"}] }'
+    router.put("/kanvaz/:id", middleware! { |request, response|
+        let repository = repository_locator::get_repository_handle(RepositoryState::Existing(request.param("id")));
+        let file_set = request.json_as::<FileSet>().unwrap();
+        repository.add_files_and_commit(file_set.files, "SAVEPOINT");
+        format!("{:?}", repository)
+    });
+
     //curl 'http://localhost:6767/kanvaz/<PUT-REPOSITORY-ID-HERE>'
     router.get("/kanvaz/:id", middleware! { |request, response|
         let repository = repository_locator::get_repository_handle(RepositoryState::Existing(request.param("id")));

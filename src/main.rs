@@ -5,7 +5,7 @@ extern crate atelier;
 use nickel::Nickel;
 use nickel::router::http_router::HttpRouter;
 use nickel::JsonBody;
-use atelier::file_set::FileSet;
+use atelier::file_set::{ FileSet, FileData };
 use atelier::repository_locator::{ self, RepositoryState };
 
 fn main() {
@@ -26,6 +26,24 @@ fn main() {
         let file_set = request.json_as::<FileSet>().unwrap();
         repository.add_files_and_commit(file_set.files, "SAVEPOINT");
         format!("{:?}", repository)
+    });
+
+    //curl 'http://localhost:6767/kanvaz/new'
+    router.get("/kanvaz/new", middleware! { |request, response|
+        let file_set = FileSet {
+            files: vec!(
+                        FileData { name: "index.html".to_string(), content: "<html>
+                            <head>
+                                <title>New Kanvaz</title>
+                            </head>
+                            <body>
+                            </body>
+                        </html>".to_string() },
+                        FileData { name: "style.css".to_string(), content: "/*put your styles here*/".to_string() },
+                        FileData { name: "app.js".to_string(), content: "/*put your js here*/".to_string() },
+                    )
+        };
+        format!("{}", file_set.to_pretty_json())
     });
 
     //curl 'http://localhost:6767/kanvaz/<PUT-REPOSITORY-ID-HERE>'

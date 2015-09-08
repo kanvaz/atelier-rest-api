@@ -22,14 +22,20 @@ fn main() {
 
     //curl 'http://localhost:6767/kanvaz/<PUT-REPOSITORY-ID-HERE>' -X PUT -H 'Content-Type: application/json;charset=UTF-8'  --data-binary $'{ "files": [{ "name":"style.css", "content": "button: { color: green; }"}] }'
     router.put("/kanvaz/:id", middleware! { |request, response|
-        let repository = repository_locator::get_repository_handle(RepositoryState::Existing(request.param("id")));
         let file_set = request.json_as::<FileSet>().unwrap();
-        repository.add_files_and_commit(file_set.files, "SAVEPOINT");
-        format!("{:?}", repository)
+
+        match request.param("id") {
+            Some(id) => {
+                let repository = repository_locator::get_repository_handle(RepositoryState::Existing(id));
+                repository.add_files_and_commit(file_set.files, "SAVEPOINT");
+                format!("{:?}", repository)
+            }
+            _ => format!("no id given")
+        }
     });
 
     //curl 'http://localhost:6767/kanvaz/new'
-    router.get("/kanvaz/new", middleware! { |request, response|
+    router.get("/kanvaz/new", middleware! { |_, response|
         let file_set = FileSet {
             files: vec!(
                         FileData { name: "index.html".to_string(), content: "<html>
@@ -48,9 +54,14 @@ fn main() {
 
     //curl 'http://localhost:6767/kanvaz/<PUT-REPOSITORY-ID-HERE>'
     router.get("/kanvaz/:id", middleware! { |request, response|
-        let repository = repository_locator::get_repository_handle(RepositoryState::Existing(request.param("id")));
-        let file_set = FileSet { files: repository.read_all_files() };
-        format!("{}", file_set.to_pretty_json())
+        match request.param("id") {
+            Some(id) => {
+                let repository = repository_locator::get_repository_handle(RepositoryState::Existing(id));
+                let file_set = FileSet { files: repository.read_all_files() };
+                format!("{}", file_set.to_pretty_json())
+            }
+            _ => format!("no id given")
+        }
     });
 
     server.utilize(router);

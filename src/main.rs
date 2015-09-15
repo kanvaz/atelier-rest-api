@@ -17,7 +17,7 @@ fn main() {
         let file_set = request.json_as::<FileSet>().unwrap();
         let repository = repository_locator::get_repository_handle(RepositoryState::NonExisting);
         repository.add_files_and_commit(file_set.files, "SAVEPOINT");
-        format!("{:?}", repository)
+        format!("{}", repository.to_pretty_json())
     });
 
     //curl 'http://localhost:6767/kanvaz/<PUT-REPOSITORY-ID-HERE>' -X PUT -H 'Content-Type: application/json;charset=UTF-8'  --data-binary $'{ "files": [{ "name":"style.css", "content": "button: { color: green; }"}] }'

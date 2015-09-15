@@ -3,6 +3,10 @@ name = "atelier-rest-api"
 version = "0.1.0"
 authors = ["Christoph Burgdorf <christoph.burgdorf@bvsn.org>"]
 
+[dependencies]
+hyper = "*"
+unicase = "*"
+
 [dependencies.nickel]
 git = "https://github.com/nickel-org/nickel.rs.git"
 

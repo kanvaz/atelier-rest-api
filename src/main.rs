@@ -1,16 +1,27 @@
 #[macro_use]
 extern crate nickel;
 extern crate atelier;
+extern crate hyper;
+extern crate unicase;
 
 use nickel::Nickel;
 use nickel::router::http_router::HttpRouter;
 use nickel::JsonBody;
+
+use hyper::header;
+use unicase::UniCase;
+
 use atelier::file_set::{ FileSet, FileData };
 use atelier::repository_locator::{ self, RepositoryState };
 
 fn main() {
     let mut server = Nickel::new();
     let mut router = Nickel::router();
+    
+    server.utilize(middleware! { |_, mut response|
+            response.set(header::AccessControlAllowHeaders(vec![UniCase("content-type".to_string())]));
+            response.set(header::AccessControlAllowOrigin::Any);
+        });
 
     //curl 'http://localhost:6767/kanvaz' -H 'Content-Type: application/json;charset=UTF-8'  --data-binary $'{ "files": [{ "name":"style.css", "content": "button: { color: red; }"}] }'
     router.post("/kanvaz", middleware! { |request, response|

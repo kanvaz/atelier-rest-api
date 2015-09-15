@@ -17,7 +17,7 @@ use atelier::repository_locator::{ self, RepositoryState };
 fn main() {
     let mut server = Nickel::new();
     let mut router = Nickel::router();
-    
+
     server.utilize(middleware! { |_, mut response|
             response.set(header::AccessControlAllowHeaders(vec![UniCase("content-type".to_string())]));
             response.set(header::AccessControlAllowOrigin::Any);
@@ -29,6 +29,12 @@ fn main() {
         let repository = repository_locator::get_repository_handle(RepositoryState::NonExisting);
         repository.add_files_and_commit(file_set.files, "SAVEPOINT");
         format!("{}", repository.to_pretty_json())
+    });
+
+    router.options("/kanvaz", middleware! {|_, mut response|
+      use hyper::method::Method::*;
+      response.set(header::AccessControlAllowMethods(vec![Get, Head, Post, Delete, Options, Put]));
+      ""
     });
 
     //curl 'http://localhost:6767/kanvaz/<PUT-REPOSITORY-ID-HERE>' -X PUT -H 'Content-Type: application/json;charset=UTF-8'  --data-binary $'{ "files": [{ "name":"style.css", "content": "button: { color: green; }"}] }'
